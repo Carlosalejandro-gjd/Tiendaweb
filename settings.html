@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulcería Deliciosa - Configuración</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout-modal.css">
+</head>
+<body>
+    <header class="main-header">
+         <div class="header-content">
+            <div class="header-title">
+                <h1>Configuración y Notificaciones</h1>
+                <p>Gestiona tus preferencias y estado.</p>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html" class="nav-link" aria-label="Inicio">
+                     <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
+                    </svg>
+                </a>
+                <a href="settings.html" class="nav-link settings-link active" aria-label="Configuración y Notificaciones">
+                    <svg class="settings-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </a>
+                <div class="connection-status-display header-status">
+                    <span class="status-indicator disconnected"></span>
+                    <span class="status-text">Desconectado</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="settings-content">
+        <h2>Preferencias</h2>
+        <section class="preferences-section">
+            <h3>Configuración API Telegram</h3>
+            <p>Modifica la configuración de la API utilizada por esta página en tu navegador.</p>
+            <p class="warning-text"><strong>Advertencia:</strong> Estos cambios solo afectan a tu navegador actual y son visibles en las herramientas de desarrollador. No cambian la configuración del servidor.</p>
+
+            <div id="api-settings-container" class="api-settings-container">
+                <h4>Modificar Configuración API</h4>
+                <div class="form-group">
+                    <label for="settings-bot-token">Bot Token (API Key):</label>
+                    <input type="text" id="settings-bot-token" name="settings-bot-token">
+                </div>
+                <div class="form-group">
+                    <label for="settings-chat-id">Chat ID:</label>
+                    <input type="text" id="settings-chat-id" name="settings-chat-id">
+                </div>
+                <div class="form-group">
+                    <label for="settings-aux-chat-id">Chat ID Auxiliar (Opcional):</label>
+                    <input type="text" id="settings-aux-chat-id" name="settings-aux-chat-id">
+                </div>
+                <div class="form-group">
+                    <label for="settings-aux-bot-token">Bot Token Auxiliar (Opcional):</label>
+                    <input type="text" id="settings-aux-bot-token" name="settings-aux-bot-token" placeholder="Dejar vacío si no se usa">
+                </div>
+                <button id="save-api-settings-button" class="settings-button save-button">Guardar Configuración</button>
+                <button id="reset-api-settings-button" class="settings-button reset-button">Restablecer Predeterminados</button>
+                <button id="scan-qr-button" class="settings-button scan-button">Escanear QR</button>
+                <button id="load-remote-config-button" class="settings-button load-button">Cargar Config Remota</button>
+                <div class="qr-info">
+                    <p>El mensaje de texto de configuración remota debe contener un objeto JSON con el siguiente formato. Los campos auxiliares son opcionales.</p>
+                    <pre><code>{"token":"...","chatId":"...","auxBotToken":"...","auxChatId":"..."}</code></pre>
+                </div>
+                <div class="qr-info">
+                    <p>El código QR debe contener un objeto JSON con este formato. Los campos auxiliares son opcionales.</p>
+                    <pre><code>{"token": "...", "chatId": "...", "auxBotToken": "...", "auxChatId": "..."}</code></pre>
+                </div>
+                <p id="settings-status-message" class="status-message" style="display: none;"></p>
+            </div>
+        </section>
+
+        <hr>
+
+        <h2>Estado de Conexión</h2>
+        <div class="connection-status-display settings-status">
+            <span class="status-indicator disconnected"></span>
+            <span class="status-text">Desconectado</span>
+        </div>
+        <p>Estado de la conexión con la API de Telegram.</p>
+
+    </main>
+
+    <!-- QR Scanner Modal -->
+    <div id="qr-scanner-modal" class="qr-scanner-modal modal-hidden">
+        <div class="qr-scanner-modal-content">
+            <div class="qr-scanner-modal-header">
+                <h2>Escanear Código QR</h2>
+                <button id="qr-scanner-close" class="qr-scanner-modal-close" aria-label="Cerrar escaner">&times;</button>
+            </div>
+            <div class="qr-scanner-body">
+                <div id="qr-reader"></div>
+                <p id="qr-reader-status" class="qr-reader-status">Apunte la cámara al código QR...</p>
+            </div>
+        </div>
+    </div>
+    <!-- End QR Scanner Modal -->
+
+    <footer>
+        <p>&copy; Tu Dulcería 2025</p>
+    </footer>
+
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "./script.js": "./script.js",
+          "./storage.js": "./storage.js",
+          "./chat-actions.js": "./chat-actions.js",
+          "./ui.js": "./ui.js",
+          "./telegram-api.js": "./telegram-api.js",
+          "./settings.js": "./settings.js"
+        }
+      }
+    </script>
+    <script type="module" src="./script.js"></script>
+    <script type="module" src="./settings.js"></script>
+</body>
+</html>

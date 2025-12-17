@@ -1,0 +1,1341 @@
+/* General Page Styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff; /* Light Alice Blue background */
+    color: #333; /* Darker text for better contrast */
+    line-height: 1.6;
+    /* Ensure body can scroll now */
+    overflow: auto;
+    padding-bottom: 150px; /* Add padding to prevent content hiding behind fixed notification panel */
+}
+
+.top-panel-ticker {
+    color: white;
+    padding: 8px 0; /* Vertical padding */
+    overflow: hidden; /* Crucial for the scrolling effect */
+    white-space: nowrap; /* Prevent text wrapping */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    /* Apply animated gradient */
+    background: linear-gradient(to right, #87ceeb, #9370db, #98fb98, #4682b4); /* Initial gradient */
+    background-size: 400% 100%; /* Size for animation */
+    animation: colorCycle 20s linear infinite; /* Apply color animation */
+}
+
+.ticker-content {
+    display: inline-block; /* Allows transform */
+    padding-left: 100%; /* Start position off-screen to the right */
+    margin: 0;
+    font-size: 0.9em;
+    /* Text scroll animation */
+    animation: scroll-left 15s linear infinite; /* Adjust duration as needed */
+    animation-play-state: paused; /* Start paused */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0); /* Starts just off screen right due to padding-left */
+    }
+    100% {
+        transform: translateX(-200%); /* Move completely across and off screen left */
+        /* Using -200% ensures the full text scrolls off before looping */
+    }
+}
+
+@keyframes colorCycle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.ticker-content.scrolling {
+    animation-play-state: running; /* Play when class is added */
+}
+
+.main-header {
+    color: white;
+    padding: 15px 20px; /* Maintain padding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle bottom border */
+    /* Apply animated gradient */
+    background: linear-gradient(to right, #4682b4, #8a2be2, #3cb371, #87ceeb); /* Initial gradient with blue, violet, green */
+    background-size: 400% 100%; /* Size for animation */
+    animation: colorCycle 20s linear infinite; /* Apply color animation */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Optional: constrain width */
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+}
+
+.header-title {
+    text-align: left; /* Align title/subtitle left */
+    flex: 1; /* Allow title to take available space */
+    margin-right: 20px; /* Space between title and nav */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add subtle shadow for better readability */
+}
+
+.main-header h2 {
+    margin: 0 0 3px 0; /* Reduced bottom margin */
+    font-size: 1.3em; /* Adjusted h1 size */
+    font-weight: 600; /* Slightly bolder */
+    letter-spacing: 0.5px; /* Add slight letter spacing */
+}
+
+.main-header p {
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9; /* Slightly less prominent subtitle */
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between nav items */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px; /* Increase padding for better touch targets */
+    border-radius: 50%; /* Make icons circular */
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    display: flex; /* Align icon */
+    align-items: center; /* Align icon */
+    justify-content: center; /* Center icon */
+    line-height: 0; /* Prevent extra space */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly visible background */
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.3); /* More prominent background for active link */
+    opacity: 1;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle background on hover */
+    opacity: 1;
+}
+
+.nav-icon, .settings-icon { /* Combined styles for icons */
+    width: 26px; /* Slightly smaller icons */
+    height: 26px;
+    fill: white;
+    display: block;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)); /* Add drop shadow to icons */
+}
+
+.shop-content {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.shop-content h2 {
+    color: #4682b4; /* Steel Blue */
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.product-card {
+    position: relative; /* Needed for positioning the pseudo-element */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    padding-top: 35px; /* Add padding top to make space for the ID */
+    text-align: center;
+    background-color: #e6f7ff; /* Lighter blue background */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex; /* Use flexbox for better vertical alignment */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Push actions to bottom */
+    min-height: 360px; /* Add a minimum height to prevent resizing on currency switch */
+}
+
+.product-card::before {
+    content: '#' attr(data-product-id); /* Display # followed by the ID from data attribute */
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: rgba(70, 130, 180, 0.7); /* Semi-transparent blue background */
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 4px;
+    z-index: 1; /* Ensure it's above the image container */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-family: monospace; /* Use monospace font for ID */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.product-image-container {
+    width: 100%; /* Take full width */
+    height: 120px; /* Fixed height for consistency */
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflow if image is too big */
+}
+
+.product-placeholder-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b0e0e6; /* Powder Blue */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px; /* For potential icon font */
+    color: #555; /* Give emoji color */
+}
+
+.product-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Scale image while preserving aspect ratio */
+    border-radius: 4px; /* Slight rounding */
+}
+
+.product-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1em;
+    color: #005a9c; /* Darker blue for heading */
+    min-height: 2.4em; /* Reserve space for 2 lines */
+}
+
+.product-card p {
+    font-size: 0.9em;
+    color: #555;
+    margin: 0 0 10px 0; /* Adjusted margin */
+    flex-grow: 1; /* Allow description to take available space */
+    min-height: 3.6em; /* Reserve space for 3 lines */
+}
+
+.product-price {
+    display: block; /* Make it a block element */
+    font-size: 1.2em; /* Larger price */
+    font-weight: bold;
+    color: #3cb371; /* Green price */
+    margin-bottom: 15px; /* Space before actions */
+    min-height: 1.5em; /* Ensure space for price display */
+}
+
+.product-actions {
+    display: flex;
+    justify-content: space-between; /* Space out input and button */
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+.quantity-input {
+    width: 50px; /* Keep width */
+    padding: 9px 5px; /* Slightly adjust padding for vertical centering */
+    border: 1px solid #a0c4e8; /* Lighter blue border */
+    border-radius: 6px; /* Slightly rounder */
+    text-align: center;
+    font-size: 1em; /* Slightly larger font */
+    font-weight: 500;
+    color: #333;
+    background-color: #f8faff; /* Very light blue background */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    appearance: textfield;
+    -moz-appearance: textfield;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quantity-input:focus {
+    outline: none;
+    border-color: #4682b4; /* Theme blue on focus */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 0 0 2px rgba(70, 130, 180, 0.3); /* Add outer glow on focus */
+}
+
+.buy-button {
+    flex-grow: 1;
+    padding: 10px 15px; /* Increase padding */
+    background-color: #005a9c; /* Darker, richer blue */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Match input rounding */
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 700; /* Bolder */
+    text-transform: uppercase;
+    letter-spacing: 0.8px; /* Increase spacing slightly */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease; /* Added transform transition */
+    box-shadow: 0 2px 5px rgba(0, 50, 100, 0.15); /* Subtle shadow */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+}
+
+.buy-button:hover {
+    background-color: #004c83; /* Slightly darker on hover */
+    box-shadow: 0 4px 8px rgba(0, 50, 100, 0.2); /* Enhance shadow on hover */
+}
+
+.buy-button:active {
+    background-color: #003f6a; /* Even darker on click */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* Inset shadow for pressed effect */
+    transform: translateY(1px); /* Slight press down effect */
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.connection-status-display {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px; /* Adjusted padding */
+    border-radius: 15px; /* Pill shape */
+    background-color: rgba(255, 255, 255, 0.2); /* Match header style */
+    color: white;
+    font-size: 0.8em; /* Adjusted font size */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); /* Add text shadow */
+    margin-left: 5px; /* Space from nav icons */
+}
+
+.connection-status-display .status-indicator {
+    width: 8px; /* Adjusted size */
+    height: 8px; /* Adjusted size */
+    border-radius: 50%;
+    margin-right: 5px; /* Adjusted margin */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added shadow transition */
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3); /* Add glow/shadow effect */
+}
+
+.connection-status-display .status-indicator.disconnected {
+    background-color: #ff4d4d; /* Red */
+    box-shadow: 0 0 4px 1px #ff4d4d; /* Red glow */
+}
+
+.connection-status-display .status-indicator.connected {
+    background-color: #39ff14; /* Bright Green */
+    box-shadow: 0 0 4px 1px #39ff14; /* Green glow */
+}
+
+.connection-status-display .status-text {
+    font-weight: 500;
+}
+
+.settings-status {
+    display: inline-flex; /* Allow it to sit nicely in the flow */
+    margin-top: 10px;
+    background-color: #e9e9e9; /* Use a non-transparent background */
+    color: #333;
+    text-shadow: none;
+}
+
+.settings-status .status-indicator {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2); /* Less prominent shadow */
+}
+
+.settings-status .status-indicator.disconnected {
+    background-color: #ff6b6b; /* Slightly softer red */
+    box-shadow: 0 0 3px 1px #ff6b6b;
+}
+
+.settings-status .status-indicator.connected {
+    background-color: #51cf66; /* Softer green */
+    box-shadow: 0 0 3px 1px #51cf66;
+}
+
+.currency-switch-container {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Space between elements */
+    padding: 4px 8px; /* Padding around */
+    border-radius: 15px; /* Similar rounding to status */
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly different bg */
+    margin-left: 5px; /* Space from status display */
+    font-size: 0.8em; /* Match status font size */
+}
+
+.currency-label {
+    color: white;
+    font-weight: 500;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px; /* Smaller switch */
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Default grey */
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px; /* Smaller slider */
+    width: 14px;
+    left: 3px; /* Adjusted positioning */
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #8a2be2; /* Accent color (purple) when checked (MLC) */
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #8a2be2;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px); /* Adjusted travel distance */
+}
+
+.slider.round {
+    border-radius: 20px; /* Fully rounded */
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- Remove Notification Panel Styles --- */
+.chat-container.notification-panel,
+.chat-header,
+.chat-messages,
+.message,
+.message .sender,
+.message .message-content,
+.message .message-image,
+.message .message-text,
+.message .timestamp,
+.user-info {
+    display: none; /* Hide completely if any remnants exist */
+}
+
+/* Remove adjustments related to user-info visibility */
+.chat-container.notification-panel .user-info[style*="display: none"] ~ .chat-messages,
+.chat-container.notification-panel .user-info:not([style*="display: none"]) ~ .chat-messages {
+   border-radius: 0; /* Reset just in case */
+}
+
+/* Floating Basket Button Styles */
+.floating-basket-button {
+    position: fixed;
+    top: 90px; /* Adjust based on header + potential ticker height */
+    left: 20px;
+    z-index: 1000; /* Ensure it stays on top */
+    background-color: #005a9c; /* Dark blue theme color */
+    color: white;
+    width: 55px; /* Button size */
+    height: 55px; /* Button size */
+    border-radius: 50%; /* Circular button */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow */
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none; /* Reset button border */
+    cursor: pointer; /* Add cursor pointer */
+    padding: 0; /* Reset button padding */
+}
+
+.floating-basket-button:hover {
+    background-color: #004c83; /* Slightly darker on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+.floating-basket-button:active {
+    background-color: #003f6a; /* Even darker on click */
+    transform: scale(0.98); /* Slight press effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+.floating-basket-button .basket-icon {
+    fill: white;
+    width: 28px; /* Icon size */
+    height: 28px;
+}
+
+/* Style for the item count badge */
+.cart-item-count {
+    position: absolute;
+    top: -5px; /* Position badge slightly above the top edge */
+    right: -5px; /* Position badge slightly past the right edge */
+    background-color: #e63946; /* Contrasting red color */
+    color: white;
+    border-radius: 50%; /* Make it circular */
+    width: 24px; /* Badge size */
+    height: 24px; /* Badge size */
+    font-size: 12px; /* Font size for count */
+    font-weight: bold;
+    display: flex; /* Use flexbox for centering content */
+    justify-content: center;
+    align-items: center;
+    line-height: 1; /* Prevent extra line height */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Optional white border */
+    transition: transform 0.2s ease-out, opacity 0.2s ease; /* Animation */
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Simple animation when updated */
+.cart-item-count.updated {
+    transform: scale(1.2); /* Briefly scale up */
+    opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    .cart-item-count {
+        width: 20px; /* Slightly smaller badge on mobile */
+        height: 20px;
+        font-size: 11px;
+        top: -4px;
+        right: -4px;
+    }
+    /* Cart modal adjustments */
+    .cart-modal-content {
+        width: 95%;
+        max-height: 85vh; /* Allow slightly more height */
+        padding: 15px;
+    }
+    .cart-modal-header h2 {
+        font-size: 1.2em;
+    }
+    .cart-item {
+        padding: 10px 5px 10px 0; /* Adjust padding */
+        flex-wrap: wrap; /* Allow wrapping within item */
+        gap: 5px; /* Reduce gap */
+    }
+    .cart-item-details {
+        flex-basis: 100%; /* Name takes full width */
+        order: 1; /* Name first */
+        margin-bottom: 5px; /* Space if wraps */
+    }
+    .cart-item-quantity {
+        order: 2; /* Quantity second */
+        font-size: 0.9em;
+        min-width: auto; /* Remove min-width */
+        text-align: left; /* Align left */
+        flex-basis: auto; /* Allow natural width */
+    }
+    .cart-item-price {
+        order: 3; /* Price third */
+        font-size: 0.9em;
+        min-width: auto; /* Remove min-width */
+        text-align: right; /* Keep price aligned right */
+        flex-grow: 1; /* Take remaining space next to quantity */
+    }
+    .cart-item-remove {
+        order: 4; /* Remove button last */
+        font-size: 1.2em; /* Keep reasonable size */
+        padding: 0 3px; /* Adjust padding */
+        margin-left: auto; /* Push remove to end */
+        align-self: center; /* Vertically center */
+    }
+    .cart-actions {
+        flex-direction: column; /* Stack buttons */
+        gap: 10px;
+    }
+    .checkout-button, .clear-cart-button {
+        width: 100%; /* Full width */
+    }
+}
+
+/* Lightbox Modal Styles */
+.lightbox {
+    position: fixed;
+    z-index: 1250; /* Higher than other modals */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
+    display: flex; /* Use flex for centering */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+    cursor: pointer; /* Indicate clicking outside closes */
+}
+
+.lightbox.modal-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+    pointer-events: none;
+}
+
+.lightbox.modal-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+    pointer-events: auto;
+}
+
+.lightbox-content {
+    display: block;
+    margin: auto;
+    max-width: 90%;
+    max-height: 80%;
+    cursor: default; /* Don't show pointer cursor on image itself */
+    border-radius: 5px; /* Optional: Slight rounding */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    animation: zoomIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.28); /* Zoom in effect */
+    will-change: transform;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close button */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 1260; /* Above image */
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Caption (optional, not currently used) */
+#lightbox-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px; /* Reserve space? */
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    .cart-item-count {
+        width: 20px; /* Slightly smaller badge on mobile */
+        height: 20px;
+        font-size: 11px;
+        top: -4px;
+        right: -4px;
+    }
+}
+
+/* Notification Container Styles */
+.notification-container {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%); /* Vertically center */
+    z-index: 2000; /* High z-index to appear above other content */
+    display: flex;
+    flex-direction: column; /* Stack notifications vertically */
+    align-items: flex-end; /* Align notifications to the right edge */
+    gap: 15px; /* Increased space between notifications */
+    pointer-events: none; /* Allow clicks to pass through the container itself */
+    width: auto; /* Allow container to size based on notifications */
+    max-width: 350px; /* Slightly narrower max width */
+}
+
+/* Individual Notification Styles */
+.notification {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    font-size: 1em;
+    text-align: center;
+    width: auto; /* Fit content */
+    max-width: 100%; /* Don't overflow container */
+    opacity: 0; /* Start hidden */
+    transform: translateX(110%); /* Start off-screen to the right */
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), /* Use bounce effect for entrance */
+                opacity 0.5s ease-in-out; /* Fade in */
+    pointer-events: auto; /* Notifications themselves are interactive (if needed) */
+    cursor: default; /* Standard cursor */
+    border: none; /* Ensure buttons have no border by default */
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0); /* Slide in to the final position */
+}
+
+/* Settings Page Specific Styles */
+.settings-content {
+    max-width: 700px; /* Adjusted width */
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.settings-content h2 {
+    color: #4682b4; /* Steel Blue */
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.settings-content .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-content .form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.settings-content .form-group input[type="text"],
+.settings-content .form-group input[type="password"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: #fff; /* White background for inputs */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.07);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.settings-content .form-group input:focus {
+    outline: none;
+    border-color: #4682b4; /* Theme blue on focus */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.07), 0 0 0 2px rgba(70, 130, 180, 0.3);
+}
+
+.settings-button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    margin-right: 10px; /* Space between buttons */
+    margin-top: 5px; /* Space above buttons */
+}
+
+.settings-button:last-child {
+    margin-right: 0;
+}
+
+.unlock-button {
+    background-color: #ffc107; /* Amber */
+    color: #333;
+    box-shadow: 0 2px 5px rgba(150, 100, 0, 0.15);
+}
+.unlock-button:hover {
+    background-color: #e0a800;
+    box-shadow: 0 4px 8px rgba(150, 100, 0, 0.2);
+}
+
+.unlock-button:active {
+    background-color: #c69500;
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.save-button {
+    background-color: #28a745; /* Green */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 100, 0, 0.15);
+}
+.save-button:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0, 100, 0, 0.2);
+}
+.save-button:active {
+    background-color: #1e7e34;
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.reset-button {
+    background-color: #6c757d; /* Gray */
+    color: white;
+    box-shadow: 0 2px 5px rgba(50, 50, 50, 0.15);
+}
+.reset-button:hover {
+    background-color: #5a6268;
+    box-shadow: 0 4px 8px rgba(50, 50, 50, 0.2);
+}
+.reset-button:active {
+     background-color: #545b62;
+     transform: translateY(1px);
+     box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.error-message, .status-message {
+    margin-top: 10px;
+    font-size: 0.9em;
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #721c24; /* Dark Red */
+    background-color: #f8d7da; /* Light Red */
+    border: 1px solid #f5c6cb;
+}
+
+.status-message {
+    color: #155724; /* Dark Green */
+    background-color: #d4edda; /* Light Green */
+    border: 1px solid #c3e6cb;
+}
+
+.settings-content .settings-status {
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add space below status */
+}
+
+/* Responsive adjustments for settings */
+@media (max-width: 700px) {
+    .settings-content {
+        max-width: 95%;
+        padding: 20px;
+    }
+    .settings-button {
+        width: 100%; /* Stack buttons */
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .settings-button:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Roulette Button */
+.roulette-button {
+    padding: 0; /* Remove padding */
+    text-align: center; /* Ensure emoji centers if text-based */
+    width: 65px; /* Diameter */
+    height: 65px; /* Diameter */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em; /* Adjust emoji size - made slightly larger */
+    line-height: 1; /* Ensure vertical centering */
+    background: linear-gradient(135deg, #a060ff, #7a1fcf); /* Vibrant purple gradient */
+    color: white; /* Color for emoji - though most are image-based */
+    text-shadow: none; /* Remove text shadow from emoji */
+    box-shadow: 0 5px 15px rgba(122, 31, 207, 0.5); /* Stronger purple shadow */
+    cursor: pointer; /* Indicate it's clickable */
+    font-weight: normal; /* Reset font weight */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+                opacity 0.5s ease-in-out,
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.roulette-button:hover {
+    background: linear-gradient(135deg, #b070ff, #8a2be2); /* Slightly lighter gradient on hover */
+    box-shadow: 0 8px 20px rgba(122, 31, 207, 0.6); /* Enhanced shadow */
+    transform: translateX(0) scale(1.08); /* Scale up more prominently */
+}
+
+.roulette-button:active {
+    background: linear-gradient(135deg, #7a1fcf, #6a1bac); /* Darker gradient on click */
+    box-shadow: 0 4px 10px rgba(122, 31, 207, 0.4); /* Reduced shadow */
+    transform: translateX(0) scale(0.95); /* Slight press effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    .cart-item-count {
+        width: 20px; /* Slightly smaller badge on mobile */
+        height: 20px;
+        font-size: 11px;
+        top: -4px;
+        right: -4px;
+    }
+    .notification-container {
+       width: auto; /* Let buttons define width */
+       right: 15px; /* Closer to edge */
+       max-width: none; /* Remove max-width on mobile */
+       align-items: flex-end; /* Align to right again */
+       gap: 12px; /* Adjust gap */
+    }
+    .notification {
+        padding: 12px 15px;
+        font-size: 0.9em;
+        width: auto; /* Auto width */
+        max-width: 80vw; /* Limit width */
+    }
+    .roulette-button {
+        width: 55px; /* Smaller */
+        height: 55px;
+        font-size: 2.2em; /* Adjust emoji size for smaller button */
+    }
+}
+
+/* Roulette Game Result Modal Styles */
+.game-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Slightly darker overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200; /* Ensure it's above most elements */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.game-modal.modal-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Transition out */
+    pointer-events: none; /* Disable interaction when hidden */
+}
+
+.game-modal.modal-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease; /* Transition in */
+    pointer-events: auto;
+}
+
+.game-modal-content {
+    background: radial-gradient(circle, #ffffff 0%, #f0f8ff 100%); /* Light radial gradient */
+    color: #333;
+    padding: 30px;
+    border-radius: 20px; /* Even more rounded */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 420px; /* Slightly wider */
+    max-height: 90vh; /* Max height */
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95); /* Start slightly smaller */
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Add bounce */
+    will-change: transform; /* Optimize animation */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.game-modal.modal-visible .game-modal-content {
+    transform: scale(1);
+}
+
+.game-modal-header {
+    display: flex;
+    justify-content: center; /* Center title */
+    align-items: center;
+    border-bottom: 1px solid #ddd; /* Dashed border */
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    position: relative; /* For absolute positioning of close button */
+}
+
+.game-modal-header h2 {
+    margin: 0;
+    color: #8a2be2; /* Purple title */
+    font-size: 1.5em; /* Slightly larger */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.game-modal-close {
+    position: absolute; /* Position relative to header */
+    top: -18px; /* Position slightly above */
+    right: -18px; /* Position slightly outside */
+    background: #e63946; /* Red background */
+    color: white;
+    border: 3px solid white; /* Thicker border */
+    border-radius: 50%;
+    width: 35px; /* Larger close button */
+    height: 35px;
+    font-size: 1.6em; /* Adjust icon size */
+    line-height: 29px; /* Ensure vertical centering */
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 10; /* Ensure it's above header content */
+}
+
+.game-modal-close:hover {
+    background-color: #d1303c; /* Darker red */
+    transform: scale(1.1) rotate(90deg); /* Rotate on hover */
+}
+
+.game-modal-body {
+    flex-grow: 1;
+    margin-bottom: 25px; /* Space before actions */
+    font-size: 1.1em;
+    line-height: 1.7;
+    overflow-y: auto; /* Scroll if content overflows */
+    padding: 0 10px; /* Add some padding */
+}
+
+.roulette-spinner-container {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.roulette-wheel {
+    position: relative;
+    width: 120px; /* Size of the wheel */
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #ff6b6b 0% 12.5%, #f06595 12.5% 25%,
+        #cc5de8 25% 37.5%, #9775fa 37.5% 50%,
+        #5c7cfa 50% 62.5%, #66d9e8 62.5% 75%,
+        #96f2d7 75% 87.5%, #ffec99 87.5% 100%
+    ); /* Colorful segments */
+    box-shadow: 0 0 0 5px #fff, 0 0 15px rgba(0,0,0,0.3);
+    animation: spin-wheel 0.8s linear infinite;
+    margin-bottom: 20px;
+}
+
+.wheel-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+.wheel-arrow {
+    position: absolute;
+    top: -20px; /* Position arrow above the wheel */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #e63946; /* Red arrow */
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+@keyframes spin-wheel {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.roulette-spinner-container p {
+    font-size: 1em;
+    color: #555;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.prize-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealPrize 0.8s 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards; /* Delay start */
+}
+
+.prize-reveal h3 {
+    color: #ff6347; /* Tomato color */
+    font-size: 1.6em; /* Larger heading */
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.prize-reveal h3 .confetti {
+    display: inline-block;
+    animation: confetti-burst 0.8s ease-out forwards;
+    transform: scale(0); /* Start small */
+}
+
+.prize-code-container {
+    padding: 20px 0;
+}
+
+.prize-code {
+    display: inline-block; /* Allow padding/border */
+    background-color: #e0f2fe; /* Light blue background */
+    color: #005a9c; /* Dark blue text */
+    font-family: monospace;
+    font-size: 1.8em; /* Larger code */
+    padding: 12px 25px; /* More padding */
+    border-radius: 8px;
+    border: 2px dashed #005a9c;
+    margin: 10px 0;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: scale(0.9);
+    opacity: 0;
+    animation: scaleInCode 0.5s 0.6s ease-out forwards; /* Delayed scale in */
+}
+
+.prize-reveal small {
+    color: #777;
+    font-size: 0.9em;
+    display: block; /* Ensure it takes its own line */
+    margin-top: 15px;
+}
+
+@keyframes revealPrize {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleInCode {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes confetti-burst {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.5) rotate(15deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.game-modal-actions {
+    margin-top: 25px; /* More space before OK button */
+    display: flex;
+    justify-content: center; /* Center the single button */
+}
+
+.game-ok-button {
+    width: 100%;
+    padding: 14px 20px; /* Larger button padding */
+    background-color: #3cb371; /* Green */
+    color: white;
+    border: none;
+    border-radius: 10px; /* More rounded */
+    cursor: pointer;
+    font-size: 1.2em; /* Larger font size */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 8px rgba(0, 100, 0, 0.25);
+}
+
+.game-ok-button:hover {
+    background-color: #33a061;
+    box-shadow: 0 6px 12px rgba(0, 100, 0, 0.3);
+    transform: translateY(-2px); /* More lift */
+}
+
+.game-ok-button:active {
+    background-color: #2a8f50;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments for game modal */
+@media (max-width: 700px) {
+    .game-modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .game-modal-header h2 {
+        font-size: 1.3em;
+    }
+    .game-modal-close {
+        font-size: 1.4em;
+        width: 30px;
+        height: 30px;
+        line-height: 24px;
+        top: -14px;
+        right: -14px;
+        border-width: 2px;
+    }
+    .game-modal-body {
+        font-size: 1em;
+        padding: 0 5px;
+    }
+    .prize-reveal h3 {
+        font-size: 1.4em;
+    }
+    .prize-code {
+        font-size: 1.4em; /* Adjust code size */
+        padding: 10px 20px;
+    }
+    .game-ok-button {
+        padding: 12px 15px;
+        font-size: 1.1em;
+    }
+    .roulette-wheel {
+        width: 100px;
+        height: 100px;
+    }
+    .wheel-inner {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Page Loader Styles */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(240, 248, 255, 0.9); /* Light background matching body, slightly transparent */
+    display: flex;
+    flex-direction: column; /* Stack spinner and text */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Highest z-index */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0s; /* Smooth fade out */
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s; /* Delay visibility change */
+    pointer-events: none;
+}
+
+.loader-spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #4682b4; /* Theme blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+    margin-bottom: 15px; /* Space between spinner and text */
+}
+
+.loader-text {
+    color: #4682b4; /* Theme blue */
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Pull to Refresh Indicator */
+.pull-refresh-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4682b4; /* Theme color */
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    z-index: 950; /* High, but below modals/loader/floating buttons */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-100%); /* Start fully above viewport */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Default transition for hiding/settling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.pull-refresh-spinner {
+    display: none; /* Hidden by default, shown when refreshing */
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Reuses the global spin animation */
+}
+
+.pull-refresh-text {
+    font-size: 0.9em;
+}

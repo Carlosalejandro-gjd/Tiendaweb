@@ -1,0 +1,306 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulcería Deliciosa - Inicio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout-modal.css">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-spinner"></div>
+        <p class="loader-text">Cargando...</p>
+    </div>
+    <!-- End Page Loader -->
+
+    <header class="main-header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Bienvenido a productos online.</h1>
+                <p>Tu tienda favorita</p>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html" class="nav-link active" aria-label="Inicio">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
+                    </svg>
+                </a>
+                <a href="settings.html" class="nav-link settings-link" aria-label="Configuración y Notificaciones">
+                    <svg class="settings-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </a>
+                <!-- Simple Connection Status Display -->
+                <div class="connection-status-display header-status">
+                    <span class="status-indicator disconnected"></span>
+                    <span class="status-text">Desconectado</span>
+                </div>
+                <!-- Currency Switch -->
+                <div class="currency-switch-container header-currency">
+                    <span class="currency-label cup-label">CUP</span>
+                    <label class="switch">
+                        <input type="checkbox" id="currency-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="currency-label mlc-label">MLC</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="top-panel-ticker" class="top-panel-ticker" style="display: none;">
+        <p class="ticker-content"></p>
+    </div>
+
+    <!-- Floating Basket Button - Changed from <a> to <button> -->
+    <button type="button" class="floating-basket-button" id="cart-button" aria-label="Ver cesta de compras">
+        <svg class="basket-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-13.55-13l1.7 3h7.17l3.58-6.48A1 1 0 0 0 15 4H6.16l-.6-1.09A1 1 0 0 0 4.6 2H3a1 1 0 0 0 0 2h1.18l2.76 5L6.1 11.55c-.13.23-.2.5-.2.78 0 1.1.9 2 2 2h10a1 1 0 0 0 0-2H8.3c-.1 0-.19-.08-.19-.18l.01-.06L7 11h9.16a1 1 0 0 0 .95-.7l3.5-7.01A.99.99 0 0 0 19.62 2H6.16z"/>
+        </svg>
+        <span class="cart-item-count" style="display: none;">0</span>
+    </button>
+
+    <main class="shop-content">
+        <h2>Nuestros Productos Estrella</h2>
+        <div class="product-grid">
+            <div class="product-card" data-product-id="1">
+                <div class="product-image-container">
+                    <div class="product-placeholder-icon candy">🍬</div>
+                    <!-- Image will be inserted here by JS -->
+                </div>
+                <h3>Gomitas Frutales</h3>
+                <p>Surtido de gomitas con sabores intensos.</p>
+                <span class="product-price">-- €</span>
+                <div class="product-actions">
+                    <label for="qty-gomitas-1" class="visually-hidden">Cantidad</label>
+                    <input type="number" id="qty-gomitas-1" name="qty-gomitas-1" value="1" min="1" max="99" class="quantity-input" aria-label="Cantidad de Gomitas Frutales">
+                    <button class="buy-button">Comprar</button>
+                </div>
+            </div>
+            <div class="product-card" data-product-id="2">
+                <div class="product-image-container">
+                    <div class="product-placeholder-icon chocolate">🍫</div>
+                    <!-- Image will be inserted here by JS -->
+                </div>
+                <h3>Tableta de Chocolate</h3>
+                <p>Chocolate con leche cremoso.</p>
+                <span class="product-price">-- €</span>
+                <div class="product-actions">
+                    <label for="qty-chocolate-2" class="visually-hidden">Cantidad</label>
+                    <input type="number" id="qty-chocolate-2" name="qty-chocolate-2" value="1" min="1" max="99" class="quantity-input" aria-label="Cantidad de Tableta de Chocolate">
+                    <button class="buy-button">Comprar</button>
+                </div>
+            </div>
+            <div class="product-card" data-product-id="3">
+                <div class="product-image-container">
+                    <div class="product-placeholder-icon lollipop">🍭</div>
+                    <!-- Image will be inserted here by JS -->
+                </div>
+                <h3>Chupetas de Colores</h3>
+                <p>Perfectas para alegrar el día.</p>
+                <span class="product-price">-- €</span>
+                <div class="product-actions">
+                    <label for="qty-chupetas-3" class="visually-hidden">Cantidad</label>
+                    <input type="number" id="qty-chupetas-3" name="qty-chupetas-3" value="1" min="1" max="99" class="quantity-input" aria-label="Cantidad de Chupetas de Colores">
+                    <button class="buy-button">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <p>¡Y mucho más!</p>
+    </main>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="cart-modal modal-hidden">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2>Tu Cesta</h2>
+                <button id="cart-modal-close" class="cart-modal-close" aria-label="Cerrar cesta">&times;</button>
+            </div>
+            <div class="cart-items-list" id="cart-items-list">
+                <!-- Cart items will be dynamically inserted here -->
+                <!-- Empty message is now handled by JS using a template -->
+            </div>
+            <div class="cart-total">
+                <!-- Label (strong tag) will be updated by JS to include currency -->
+                <strong>Total:</strong> <span id="cart-total-price">0,00 CUP</span> <!-- Default display -->
+            </div>
+            <div class="cart-actions">
+                 <button id="cart-checkout-button" class="checkout-button">De acuerdo</button>
+                 <button id="cart-clear-button" class="clear-cart-button">Vaciar Cesta</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Shopping Cart Modal -->
+
+    <!-- Image Lightbox Modal -->
+    <div id="image-lightbox" class="lightbox modal-hidden">
+        <span class="lightbox-close" aria-label="Cerrar imagen">&times;</span>
+        <img class="lightbox-content" id="lightbox-image" src="" alt="Imagen ampliada del producto">
+        <div id="lightbox-caption"></div>
+    </div>
+    <!-- End Image Lightbox Modal -->
+
+    <!-- Checkout Information Modal -->
+    <div id="checkout-modal" class="checkout-modal modal-hidden">
+        <div class="checkout-modal-content">
+            <div class="checkout-modal-header">
+                <h2>Detalles del Pedido</h2>
+                <button id="checkout-modal-close" class="checkout-modal-close" aria-label="Cerrar pedido">&times;</button>
+            </div>
+            <form id="checkout-form" class="checkout-form">
+                <div class="form-group">
+                    <label for="checkout-nombre">Nombre:</label>
+                    <input type="text" id="checkout-nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-apellido">Apellido:</label>
+                    <input type="text" id="checkout-apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-movil">Número de Móvil:</label>
+                    <input type="tel" id="checkout-movil" name="movil" required pattern="^\+?[0-9]{1,4}[0-9]{7,14}$" title="Incluye el código de país (ej: +535xxxxxxx)" placeholder="+XX XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="checkout-fecha">Fecha de Entrega Deseada:</label>
+                    <input type="date" id="checkout-fecha" name="fecha" required>
+                </div>
+                <div class="checkout-actions">
+                    <button type="submit" id="checkout-submit-button" class="submit-order-button">Realizar Pedido</button>
+                </div>
+                 <p id="checkout-error-message" class="checkout-error-message" style="display: none;"></p>
+            </form>
+        </div>
+    </div>
+    <!-- End Checkout Information Modal -->
+
+
+    <!-- MLC Payment Information Modal -->
+    <div id="mlc-payment-modal" class="mlc-payment-modal modal-hidden">
+        <div class="mlc-payment-modal-content">
+            <div class="mlc-payment-modal-header">
+                <h2>Información de Pago (MLC)</h2>
+                <button id="mlc-payment-modal-close" class="mlc-payment-modal-close" aria-label="Cerrar Información de Pago">&times;</button>
+            </div>
+            <div id="mlc-payment-details" class="mlc-payment-details">
+                <!-- Payment details will be shown here -->
+                 <p class="service-unavailable-message">⚠️ Servicio de pago por tarjeta actualmente no disponible.</p>
+                 <p>Por favor, póngase en contacto para coordinar el pago.</p>
+                <!-- Example structure if card details were available:
+                <p>Por favor, transfiera el monto total a la siguiente tarjeta:</p>
+                <div class="card-details">
+                    <strong>Número de Tarjeta:</strong> <span>XXXX-XXXX-XXXX-XXXX</span><br>
+                    <strong>Titular:</strong> <span>Nombre Apellido</span>
+                </div>
+                <p>Una vez realizada la transferencia, su pedido será procesado.</p>
+                 -->
+            </div>
+            <div class="mlc-payment-actions">
+                <button id="mlc-payment-modal-ok" class="mlc-payment-ok-button">De Acuerdo</button>
+            </div>
+        </div>
+    </div>
+    <!-- End MLC Payment Information Modal -->
+
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container">
+        <!-- Notifications will be dynamically added here -->
+    </div>
+    <!-- End Notification Container -->
+
+    <!-- Roulette Game Result Modal -->
+    <div id="roulette-result-modal" class="game-modal modal-hidden">
+        <div class="game-modal-content">
+            <div class="game-modal-header">
+                <h2>¡Resultado de la Ruleta!</h2>
+                <button id="roulette-result-modal-close" class="game-modal-close" aria-label="Cerrar resultado">&times;</button>
+            </div>
+            <div id="roulette-result-message" class="game-modal-body">
+                <!-- Game result will be shown here -->
+                <p>Girando...</p>
+            </div>
+            <div class="game-modal-actions">
+                <button id="roulette-result-modal-ok" class="game-ok-button">De Acuerdo</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Roulette Game Result Modal -->
+
+    <!-- Template for Empty Cart Message -->
+    <template id="cart-empty-message-template">
+        <p class="cart-empty-message">Tu cesta está vacía.</p>
+    </template>
+
+    <footer>
+        <p>&copy; Tu Dulcería 2025</p>
+    </footer>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "./script.js": "./script.js",
+          "./storage.js": "./storage.js",
+          "./chat-actions.js": "./chat-actions.js",
+          "./ui.js": "./ui.js",
+          "./cart.js": "./cart.js",
+          "./cart-ui.js": "./cart-ui.js",
+          "./checkout.js": "./checkout.js",
+          "./telegram-api.js": "./telegram-api.js"
+        }
+      }
+    </script>
+    <script type="module" src="./script.js"></script>
+    <script type="module">
+        import { updateTickerDisplay } from './ui.js';
+        import { loadAllProductData } from './ui.js';
+        import { initializeCart } from './cart.js';
+        import { initializeCartUI } from './cart-ui.js';
+        import { initializeCheckoutModal } from './checkout.js';
+        import { initializeCurrencySwitch, handleCurrencyChange } from './ui.js';
+        // Import lightbox and image click listener initializers
+        import { initializeLightbox, initializeProductImageClickListeners } from './ui.js';
+        // Import the function to hide the loader
+        import { hideLoader } from './ui.js';
+
+        const TICKER_STORAGE_KEY = 'topPanelTickerText';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialTickerText = localStorage.getItem(TICKER_STORAGE_KEY);
+            if (initialTickerText) {
+                updateTickerDisplay(initialTickerText);
+            }
+
+            // Initialize main components
+            loadAllProductData(); // Load product data which populates the grid
+            initializeCart(); // Load cart from storage
+            initializeCartUI(); // Set up cart modal listeners and display
+            initializeCheckoutModal(); // Set up checkout modal listeners
+            initializeCurrencySwitch(); // Set up currency toggle
+            initializeLightbox(); // Initialize the lightbox elements and listeners
+            initializeProductImageClickListeners(); // Add listeners for product image clicks
+
+            // Event listeners for cross-tab communication
+            window.addEventListener('storage', (event) => {
+                if (event.key === TICKER_STORAGE_KEY) {
+                    updateTickerDisplay(event.newValue);
+                }
+                if (event.key === 'shoppingCartItems') {
+                   initializeCart();
+                   if (typeof window.renderCartItemsIfVisible === 'function') {
+                       window.renderCartItemsIfVisible();
+                   }
+                }
+                if (event.key === 'selectedCurrency') {
+                   handleCurrencyChange(event.newValue);
+                }
+            });
+
+            // Hide the page loader now that initial synchronous setup is complete
+            // Note: If loadAllProductData or others become truly async (e.g., fetching),
+            // this should be moved after awaiting those Promises.
+            hideLoader();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+/* Checkout Modal Styles */
+.checkout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1150; /* Higher than cart modal */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.checkout-modal.modal-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Transition out */
+    pointer-events: none; /* Disable interaction when hidden */
+}
+
+.checkout-modal.modal-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease; /* Transition in */
+    pointer-events: auto;
+}
+
+.checkout-modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 450px; /* Slightly smaller max-width */
+    max-height: 90vh; /* Max height */
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95); /* Start slightly smaller */
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Add bounce */
+    will-change: transform; /* Optimize animation */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.checkout-modal.modal-visible .checkout-modal-content {
+    transform: scale(1);
+}
+
+.checkout-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px; /* More space before form */
+}
+
+.checkout-modal-header h2 {
+    margin: 0;
+    color: #4682b4; /* Steel Blue */
+    font-size: 1.3em;
+}
+
+.checkout-modal-close {
+    background: none;
+    border: none;
+    font-size: 2em;
+    line-height: 1;
+    cursor: pointer;
+    color: #aaa; /* Slightly lighter grey */
+    padding: 0 5px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.checkout-modal-close:hover {
+    color: #333;
+    transform: scale(1.1);
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form groups */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="date"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: #f8faff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.07);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4682b4; /* Theme blue on focus */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.07), 0 0 0 2px rgba(70, 130, 180, 0.3); /* Add outer glow on focus */
+}
+
+/* Style date input placeholder */
+.form-group input[type="date"]:invalid {
+    color: #999;
+}
+
+.checkout-actions {
+    margin-top: 10px; /* Space above submit button */
+}
+
+.submit-order-button {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #005a9c; /* Darker, richer blue */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0, 50, 100, 0.15);
+}
+
+.submit-order-button:hover {
+    background-color: #004c83; /* Slightly darker on hover */
+    box-shadow: 0 4px 8px rgba(0, 50, 100, 0.2);
+}
+
+.submit-order-button:active {
+    background-color: #003f6a; /* Even darker on click */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    transform: translateY(1px);
+}
+
+.checkout-error-message {
+    color: #e63946; /* Red */
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* MLC Payment Modal Styles */
+.mlc-payment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65); /* Slightly darker overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200; /* Higher than checkout modal */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.mlc-payment-modal.modal-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    pointer-events: none;
+}
+
+.mlc-payment-modal.modal-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+.mlc-payment-modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px; /* Smaller max-width */
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    will-change: transform;
+    overflow-y: auto;
+}
+
+.mlc-payment-modal.modal-visible .mlc-payment-modal-content {
+    transform: scale(1);
+}
+
+.mlc-payment-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.mlc-payment-modal-header h2 {
+    margin: 0;
+    color: #8a2be2; /* Purple accent for MLC */
+    font-size: 1.2em;
+}
+
+.mlc-payment-modal-close {
+    background: none;
+    border: none;
+    font-size: 2em;
+    line-height: 1;
+    cursor: pointer;
+    color: #aaa;
+    padding: 0 5px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.mlc-payment-modal-close:hover {
+    color: #333;
+    transform: scale(1.1);
+}
+
+.mlc-payment-details {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+}
+
+.mlc-payment-details .service-unavailable-message {
+    font-weight: bold;
+    color: #e63946; /* Red */
+    margin-bottom: 10px;
+}
+
+.mlc-payment-details .card-details {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-family: monospace;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.mlc-payment-details .card-details span {
+    font-weight: bold;
+    color: #005a9c;
+}
+
+.mlc-payment-actions {
+    margin-top: 25px; /* More space before OK button */
+    display: flex;
+    justify-content: center; /* Center the single button */
+}
+
+.mlc-payment-ok-button {
+    padding: 10px 30px; /* Wider padding */
+    background-color: #8a2be2; /* Purple accent color */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(138, 43, 226, 0.2);
+}
+
+.mlc-payment-ok-button:hover {
+    background-color: #7a1fcf;
+    box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3);
+}
+
+.mlc-payment-ok-button:active {
+    background-color: #6a1bac;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    transform: translateY(1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    .checkout-modal-content {
+        width: 95%;
+        max-height: 90vh;
+        padding: 20px;
+    }
+    .checkout-modal-header h2 {
+        font-size: 1.2em;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"] {
+        padding: 9px 10px;
+        font-size: 0.95em;
+    }
+    .submit-order-button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 700px) {
+    .mlc-payment-modal-content {
+        width: 95%;
+        max-height: 85vh;
+        padding: 20px;
+    }
+    .mlc-payment-modal-header h2 {
+        font-size: 1.1em;
+    }
+    .mlc-payment-details {
+        font-size: 0.9em;
+    }
+}
